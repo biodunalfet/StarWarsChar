@@ -15,7 +15,7 @@ import io.reactivex.Single
 import javax.inject.Inject
 
 class RemoteImpl @Inject constructor(
-    private val service : StarWarsService,
+    private val service: StarWarsService,
     private val responseMapper: SearchPersonResponseMapper,
     private val filmMapper: FilmMapper,
     private val planetMapper: PlanetMapper,

@@ -4,14 +4,13 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.hf.cache.db.DbConstants
-import com.hf.cache.mapper.CachedFilmMapper
-import javax.inject.Inject
 
 @Entity(tableName = DbConstants.FILM_TABLE_NAME)
-data class CachedFilm (
-        @PrimaryKey
-        @ColumnInfo(name = DbConstants.COLUMN_FILM_ID)
-        val id : String,
-        val title : String?,
-        val release_date : String?,
-        val opening_crawl : String?)
+data class CachedFilm(
+    @PrimaryKey
+    @ColumnInfo(name = DbConstants.COLUMN_FILM_ID)
+    val id: String,
+    val title: String?,
+    val release_date: String?,
+    val opening_crawl: String?
+)

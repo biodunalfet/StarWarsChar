@@ -11,8 +11,7 @@ import javax.inject.Inject
 class FilmCacheImpl @Inject constructor(
     private val mapper: CachedFilmMapper,
     private val starWarsDatabase: StarWarsDatabase
-) : ICache<String, FilmEntity>
-    {
+) : ICache<String, FilmEntity> {
 
     override fun findItemById(id: String): Single<FilmEntity> {
         return starWarsDatabase.filmDao().getFilmById(id).map { mapper.mapFromCached(it) }

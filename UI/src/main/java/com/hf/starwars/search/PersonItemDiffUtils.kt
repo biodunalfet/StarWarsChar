@@ -3,9 +3,9 @@ package com.hf.starwars.search
 import androidx.recyclerview.widget.DiffUtil
 import com.hf.presentation.model.PersonListItemView
 
-class PersonItemDiffUtils (
-    private val oldList : List<PersonListItemView?>,
-    private val newList : List<PersonListItemView?>
+class PersonItemDiffUtils(
+    private val oldList: List<PersonListItemView?>,
+    private val newList: List<PersonListItemView?>
 ) : DiffUtil.Callback() {
 
     override fun areItemsTheSame(p0: Int, p1: Int): Boolean {

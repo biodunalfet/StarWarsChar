@@ -10,12 +10,12 @@ import io.reactivex.Single
 
 interface IStarWarsDataSource {
 
-    fun searchPersons(query : String) : Observable<List<PersonEntity>>
-    fun saveSpecie(id : String, specie : SpecieEntity) : Completable
-    fun savePlanet(id : String, planet : PlanetEntity) : Completable
-    fun saveFilm(id : String, film : FilmEntity) : Completable
-    fun getFilmWithId(id : String) : Single<FilmEntity>
-    fun getPlanetWithId(id : String) : Single<PlanetEntity>
-    fun getSpecieWithId(id : String) : Single<SpecieEntity>
+    fun searchPersons(query: String): Observable<List<PersonEntity>>
+    fun saveSpecie(id: String, specie: SpecieEntity): Completable
+    fun savePlanet(id: String, planet: PlanetEntity): Completable
+    fun saveFilm(id: String, film: FilmEntity): Completable
+    fun getFilmWithId(id: String): Single<FilmEntity>
+    fun getPlanetWithId(id: String): Single<PlanetEntity>
+    fun getSpecieWithId(id: String): Single<SpecieEntity>
 
 }

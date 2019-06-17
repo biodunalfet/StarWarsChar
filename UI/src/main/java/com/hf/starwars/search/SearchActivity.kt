@@ -4,33 +4,30 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
-import com.hf.starwars.Constants.PERSON_EXTRA_KEY
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hf.presentation.search.SearchViewModel
 import com.hf.presentation.state.ResourceState
-import dagger.android.AndroidInjection
-import kotlinx.android.synthetic.main.activity_search.*
-import javax.inject.Inject
-import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.DividerItemDecoration
-import com.hf.starwars.Constants
+import com.hf.starwars.Constants.PERSON_EXTRA_KEY
 import com.hf.starwars.R
 import com.hf.starwars.ViewModelFactory
 import com.hf.starwars.details.PersonDetailsActivity
+import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.content_search.*
 import timber.log.Timber
+import javax.inject.Inject
 
 
 class SearchActivity : AppCompatActivity() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-    private lateinit var viewModel : SearchViewModel
+    private lateinit var viewModel: SearchViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

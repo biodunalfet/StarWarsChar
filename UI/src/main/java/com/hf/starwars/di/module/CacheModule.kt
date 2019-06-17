@@ -28,18 +28,14 @@ abstract class CacheModule {
     }
 
     @Binds
-    abstract fun providesUrlToIdConverter
-                (converter : UrlToIdMapper) : IUrlToIdMapper
+    abstract fun providesUrlToIdConverter(converter: UrlToIdMapper): IUrlToIdMapper
 
     @Binds
-    abstract fun bindFilmCache
-                (cache: FilmCacheImpl): ICache<String, FilmEntity>
+    abstract fun bindFilmCache(cache: FilmCacheImpl): ICache<String, FilmEntity>
 
     @Binds
-    abstract fun bindPlanetCache
-                (cache: PlanetCacheImpl): ICache<String, PlanetEntity>
+    abstract fun bindPlanetCache(cache: PlanetCacheImpl): ICache<String, PlanetEntity>
 
     @Binds
-    abstract fun bindSpecieCache
-                (cache: SpecieCacheImpl): ICache<String, SpecieEntity>
+    abstract fun bindSpecieCache(cache: SpecieCacheImpl): ICache<String, SpecieEntity>
 }

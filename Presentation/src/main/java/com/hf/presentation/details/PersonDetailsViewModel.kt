@@ -1,13 +1,11 @@
 package com.hf.presentation.details
 
-import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.hf.domain.interactor.details.GetFilmUseCase
 import com.hf.domain.interactor.details.GetPlanetUseCase
 import com.hf.domain.interactor.details.GetSpeciesUseCase
 import com.hf.domain.model.Film
-import com.hf.domain.model.Person
 import com.hf.domain.model.Planet
 import com.hf.domain.model.Specie
 import com.hf.presentation.mapper.FilmViewMapper
@@ -17,11 +15,10 @@ import com.hf.presentation.mapper.SpecieViewMapper
 import com.hf.presentation.model.*
 import com.hf.presentation.state.Resource
 import com.hf.presentation.state.ResourceState
-import io.reactivex.observers.DisposableObserver
 import io.reactivex.observers.DisposableSingleObserver
 import javax.inject.Inject
 
-class PersonDetailsViewModel  @Inject constructor(
+class PersonDetailsViewModel @Inject constructor(
     private val filmUseCase: GetFilmUseCase,
     private val speciesUseCase: GetSpeciesUseCase,
     private val planetUseCase: GetPlanetUseCase,
@@ -47,7 +44,7 @@ class PersonDetailsViewModel  @Inject constructor(
             : MutableLiveData<Resource<MutableList<FilmView>>> = MutableLiveData()
 
 
-    fun onPersonReceived(person : PersonListItemView?) {
+    fun onPersonReceived(person: PersonListItemView?) {
 
         person?.let { p ->
 
@@ -69,9 +66,13 @@ class PersonDetailsViewModel  @Inject constructor(
     }
 
     private fun handleAvailablePersonDetails(p: PersonListItemView) {
-        personDetailsLiveData.postValue(Resource(ResourceState.SUCCESS,
-            personViewMapper.apply(p),
-            null))
+        personDetailsLiveData.postValue(
+            Resource(
+                ResourceState.SUCCESS,
+                personViewMapper.apply(p),
+                null
+            )
+        )
     }
 
     private fun fetchFilms(films: List<String>) {
@@ -103,9 +104,11 @@ class PersonDetailsViewModel  @Inject constructor(
             val films = filmLiveData.value?.data ?: mutableListOf()
             films.add(filmViewMapper.mapToView(film))
 
-            filmLiveData.value =  Resource(ResourceState.SUCCESS,
+            filmLiveData.value = Resource(
+                ResourceState.SUCCESS,
                 films,
-                null)
+                null
+            )
 
         }
 
@@ -141,7 +144,6 @@ class PersonDetailsViewModel  @Inject constructor(
         }
 
     }
-
 
 
 }

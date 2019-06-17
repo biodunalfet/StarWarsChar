@@ -1,6 +1,5 @@
 package com.hf.cache
 
-import android.util.Log
 import com.hf.cache.db.StarWarsDatabase
 import com.hf.cache.mapper.CachedPlanetMapper
 import com.hf.data.model.PlanetEntity
@@ -12,8 +11,7 @@ import javax.inject.Inject
 class PlanetCacheImpl @Inject constructor(
     private val mapper: CachedPlanetMapper,
     private val starWarsDatabase: StarWarsDatabase
-) : ICache<String, PlanetEntity>
-{
+) : ICache<String, PlanetEntity> {
 
     override fun findItemById(id: String): Single<PlanetEntity> {
         return starWarsDatabase.planetDao().getPlanetById(id).map { mapper.mapFromCached(it) }

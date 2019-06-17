@@ -13,7 +13,7 @@ import javax.inject.Inject
 class StarWarsApplication : Application(), HasActivityInjector {
 
     @Inject
-    lateinit var androidInjector : DispatchingAndroidInjector<Activity>
+    lateinit var androidInjector: DispatchingAndroidInjector<Activity>
 
     override fun activityInjector(): AndroidInjector<Activity> {
         return androidInjector
@@ -26,7 +26,7 @@ class StarWarsApplication : Application(), HasActivityInjector {
 
         DaggerApplicationComponent
             .builder()
-            . application(this)
+            .application(this)
             .build()
             .inject(this)
     }

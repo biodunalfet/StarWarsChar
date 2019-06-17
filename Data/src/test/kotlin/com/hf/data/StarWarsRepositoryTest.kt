@@ -24,19 +24,28 @@ import test.MapperFactory
 class StarWarsRepositoryTest {
 
     lateinit var starWarsRepository: StarWarsRepository
-    @Mock lateinit var remoteDataSourceMock: RemoteDataSource
-    @Mock lateinit var localDataSourceMock: LocalDataSource
-    @Mock lateinit var filmMapperMock: FilmMapper
-    @Mock lateinit var planetMapperMock: PlanetMapper
-    @Mock lateinit var personMapperMock: PersonMapper
-    @Mock lateinit var specieMapperMock: SpecieMapper
-    @Mock lateinit var urlToIdMapperMock: UrlToIdMapper
+    @Mock
+    lateinit var remoteDataSourceMock: RemoteDataSource
+    @Mock
+    lateinit var localDataSourceMock: LocalDataSource
+    @Mock
+    lateinit var filmMapperMock: FilmMapper
+    @Mock
+    lateinit var planetMapperMock: PlanetMapper
+    @Mock
+    lateinit var personMapperMock: PersonMapper
+    @Mock
+    lateinit var specieMapperMock: SpecieMapper
+    @Mock
+    lateinit var urlToIdMapperMock: UrlToIdMapper
 
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        starWarsRepository = StarWarsRepository(filmMapperMock, planetMapperMock, specieMapperMock,
-            personMapperMock, urlToIdMapperMock, localDataSourceMock, remoteDataSourceMock)
+        starWarsRepository = StarWarsRepository(
+            filmMapperMock, planetMapperMock, specieMapperMock,
+            personMapperMock, urlToIdMapperMock, localDataSourceMock, remoteDataSourceMock
+        )
     }
 
     @Test
@@ -63,8 +72,10 @@ class StarWarsRepositoryTest {
     fun getPersonCallsRemoteDataSourceWithCorrectParams() {
 
         val captor = argumentCaptor<String>()
-        val data = listOf(MapperFactory.makePersonEntity(),
-            MapperFactory.makePersonEntity(), MapperFactory.makePersonEntity())
+        val data = listOf(
+            MapperFactory.makePersonEntity(),
+            MapperFactory.makePersonEntity(), MapperFactory.makePersonEntity()
+        )
         stubSearchPerson(Observable.just(data))
 
         val personData = MapperFactory.makePerson()
@@ -224,55 +235,51 @@ class StarWarsRepositoryTest {
     }
 
 
-
-    private fun stubPersonMapper(domain : Person) {
+    private fun stubPersonMapper(domain: Person) {
         whenever(personMapperMock.mapFromEntity(any())).thenReturn(domain)
     }
 
-    private fun stubPlanetMapper(domain : Planet) {
+    private fun stubPlanetMapper(domain: Planet) {
         whenever(planetMapperMock.mapFromEntity(any())).thenReturn(domain)
     }
 
-    private fun stubSpecieMapper(domain : Specie) {
+    private fun stubSpecieMapper(domain: Specie) {
         whenever(specieMapperMock.mapFromEntity(any())).thenReturn(domain)
     }
 
-    private fun stubFilmMapper(domain : Film) {
+    private fun stubFilmMapper(domain: Film) {
         whenever(filmMapperMock.mapFromEntity(any())).thenReturn(domain)
     }
 
-    private fun stubUrlMapper(id : String) {
+    private fun stubUrlMapper(id: String) {
         whenever(urlToIdMapperMock.apply(any())).thenReturn(id)
     }
 
-    private fun stubGetFilmWithId(local : Boolean, single: Single<FilmEntity>?) {
+    private fun stubGetFilmWithId(local: Boolean, single: Single<FilmEntity>?) {
 
         if (local) {
             whenever(localDataSourceMock.getFilmWithId(any())).thenReturn(single)
-        }
-        else {
+        } else {
             whenever(localDataSourceMock.getFilmWithId(any())).thenReturn(Single.error(Exception()))
             whenever(remoteDataSourceMock.getFilmWithId(any())).thenReturn(single)
         }
     }
 
-    private fun stubGetPlanetWithId(local : Boolean, single: Single<PlanetEntity>?) {
+    private fun stubGetPlanetWithId(local: Boolean, single: Single<PlanetEntity>?) {
 
         if (local) {
             whenever(localDataSourceMock.getPlanetWithId(any())).thenReturn(single)
-        }
-        else {
+        } else {
             whenever(localDataSourceMock.getPlanetWithId(any())).thenReturn(Single.error(Exception()))
             whenever(remoteDataSourceMock.getPlanetWithId(any())).thenReturn(single)
         }
     }
 
-    private fun stubGetSpecieWithId(local : Boolean, single: Single<SpecieEntity>?) {
+    private fun stubGetSpecieWithId(local: Boolean, single: Single<SpecieEntity>?) {
 
         if (local) {
             whenever(localDataSourceMock.getSpecieWithId(any())).thenReturn(single)
-        }
-        else {
+        } else {
             whenever(localDataSourceMock.getSpecieWithId(any())).thenReturn(Single.error(Exception()))
             whenever(remoteDataSourceMock.getSpecieWithId(any())).thenReturn(single)
         }

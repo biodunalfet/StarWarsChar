@@ -1,7 +1,6 @@
 package com.hf.domain.interactor.details
 
 import com.hf.domain.executor.PostExecutionThread
-import com.hf.domain.model.Planet
 import com.hf.domain.model.Specie
 import com.hf.domain.repository.IStarWarsRepository
 import com.nhaarman.mockito_kotlin.any
@@ -9,12 +8,11 @@ import com.nhaarman.mockito_kotlin.argumentCaptor
 import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.whenever
 import io.reactivex.Single
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
-import test.PlanetDataFactory
 import test.SpecieDataFactory
 
 class GetSpeciesUseCaseTest {
@@ -70,7 +68,7 @@ class GetSpeciesUseCaseTest {
         assertEquals(captor.firstValue, stubbedParam.id)
     }
 
-    private fun stubGetSpecieUseCase(single : Single<Specie>) {
+    private fun stubGetSpecieUseCase(single: Single<Specie>) {
         whenever(starWarsRepository.getSpecieById(any()))
             .thenReturn(single)
     }

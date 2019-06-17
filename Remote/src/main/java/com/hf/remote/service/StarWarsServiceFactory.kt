@@ -12,7 +12,8 @@ object StarWarsServiceFactory {
 
     fun makeStarWarsService(isDebug: Boolean): StarWarsService {
         val okHttpClient = makeOkHttpClient(
-            makeLoggingInterceptor((isDebug)))
+            makeLoggingInterceptor((isDebug))
+        )
         return makeStarWarsService(okHttpClient, Gson())
     }
 

@@ -6,13 +6,14 @@ import com.hf.data.model.SpecieEntity
 import javax.inject.Inject
 
 class CachedSpecieMapper @Inject constructor(
-    private val urlToIdMapper : IUrlToIdMapper
-)
-    : CacheMapper<CachedSpecie, SpecieEntity> {
+    private val urlToIdMapper: IUrlToIdMapper
+) : CacheMapper<CachedSpecie, SpecieEntity> {
 
     override fun mapFromCached(type: CachedSpecie): SpecieEntity {
-        return SpecieEntity(type.name,
-            type.language, type.homeworld, type.id)
+        return SpecieEntity(
+            type.name,
+            type.language, type.homeworld, type.id
+        )
     }
 
     override fun mapToCached(type: SpecieEntity): CachedSpecie? {

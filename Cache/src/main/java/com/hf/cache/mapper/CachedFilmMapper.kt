@@ -6,9 +6,8 @@ import com.hf.data.model.FilmEntity
 import javax.inject.Inject
 
 class CachedFilmMapper @Inject constructor(
-    private val urlToIdMapper : IUrlToIdMapper
-)
-    : CacheMapper<CachedFilm, FilmEntity> {
+    private val urlToIdMapper: IUrlToIdMapper
+) : CacheMapper<CachedFilm, FilmEntity> {
 
     override fun mapFromCached(type: CachedFilm): FilmEntity {
         return FilmEntity(type.title, type.release_date, type.opening_crawl, type.id)

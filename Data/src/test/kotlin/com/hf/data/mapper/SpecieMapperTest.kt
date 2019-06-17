@@ -2,14 +2,14 @@ package com.hf.data.mapper
 
 import com.hf.data.model.SpecieEntity
 import com.hf.domain.model.Specie
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import test.MapperFactory
 
 class SpecieMapperTest {
 
-    private lateinit var mapper : SpecieMapper
+    private lateinit var mapper: SpecieMapper
 
     @Before
     fun setUp() {

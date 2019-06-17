@@ -12,7 +12,7 @@ import io.reactivex.Single
 abstract class PlanetDao {
 
     @Query(DbConstants.FETCH_PLANET_BY_ID_QUERY)
-    abstract fun getPlanetById(planet_id : String): Single<CachedPlanet>
+    abstract fun getPlanetById(planet_id: String): Single<CachedPlanet>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract fun insertPlanet(planet: CachedPlanet)

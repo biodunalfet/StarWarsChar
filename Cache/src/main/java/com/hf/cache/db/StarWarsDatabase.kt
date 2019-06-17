@@ -12,13 +12,15 @@ import com.hf.cache.model.CachedPlanet
 import com.hf.cache.model.CachedSpecie
 import javax.inject.Inject
 
-@Database(entities = [CachedSpecie::class,
-    CachedPlanet::class, CachedFilm::class], version = 1)
+@Database(
+    entities = [CachedSpecie::class,
+        CachedPlanet::class, CachedFilm::class], version = 1
+)
 abstract class StarWarsDatabase @Inject constructor() : RoomDatabase() {
 
-    abstract fun specieDao() : SpecieDao
-    abstract fun planetDao() : PlanetDao
-    abstract fun filmDao() : FilmDao
+    abstract fun specieDao(): SpecieDao
+    abstract fun planetDao(): PlanetDao
+    abstract fun filmDao(): FilmDao
 
     companion object {
 

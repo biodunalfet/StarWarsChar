@@ -1,18 +1,15 @@
 package com.hf.starwars.details
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.hf.presentation.details.PersonDetailsViewModel
 import com.hf.presentation.model.PersonListItemView
 import com.hf.starwars.Constants.PERSON_EXTRA_KEY
 import com.hf.starwars.R
 import com.hf.starwars.ViewModelFactory
 import dagger.android.AndroidInjection
-
 import kotlinx.android.synthetic.main.activity_person_details.*
 import kotlinx.android.synthetic.main.content_person_details.*
 import javax.inject.Inject
@@ -21,7 +18,7 @@ class PersonDetailsActivity : AppCompatActivity() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-    private lateinit var viewModel : PersonDetailsViewModel
+    private lateinit var viewModel: PersonDetailsViewModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

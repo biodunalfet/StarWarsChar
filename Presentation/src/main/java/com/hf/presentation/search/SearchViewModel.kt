@@ -23,12 +23,11 @@ class SearchViewModel @Inject constructor(
             : MutableLiveData<Resource<List<PersonListItemView>>> = MutableLiveData()
 
 
-    fun search(query : String) {
+    fun search(query: String) {
         if (query.isNotEmpty()) {
             liveData.postValue(Resource(ResourceState.LOADING, null, null))
             return searchPersonUseCase.execute(PersonSearchResultsSubscriber(), SearchPersonUseCase.Params(query))
-        }
-        else {
+        } else {
             liveData.postValue(Resource(ResourceState.SUCCESS, emptyList(), null))
         }
     }
@@ -52,7 +51,6 @@ class SearchViewModel @Inject constructor(
         }
 
     }
-
 
 
 }

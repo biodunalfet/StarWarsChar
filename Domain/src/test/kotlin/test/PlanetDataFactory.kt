@@ -8,28 +8,27 @@ import java.util.concurrent.ThreadLocalRandom
 object PlanetDataFactory {
 
 
-    fun randomUuid() : String {
+    fun randomUuid(): String {
         return UUID.randomUUID().toString()
     }
 
-    fun randomInt() : Int {
+    fun randomInt(): Int {
         return ThreadLocalRandom.current().nextInt(0, 20)
     }
 
-    fun randomPlanetUrl(valid : Boolean) : String {
+    fun randomPlanetUrl(valid: Boolean): String {
         return if (valid) {
             "https://swapi.co/api/planets/${randomInt()}/"
-        }
-        else {
+        } else {
             randomUuid()
         }
     }
 
-    fun makePlanet() : Planet {
+    fun makePlanet(): Planet {
         return Planet(randomUuid(), randomUuid(), randomPlanetUrl(true))
     }
 
-    fun makePlanetParam() : GetPlanetUseCase.Params {
+    fun makePlanetParam(): GetPlanetUseCase.Params {
         return GetPlanetUseCase.Params.withId(randomUuid())
     }
 }

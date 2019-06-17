@@ -9,8 +9,8 @@ import io.reactivex.Single
 
 interface IRemote {
 
-    fun searchPersons(query : String) : Observable<List<PersonEntity>>
-    fun getFilm(id : String) : Single<FilmEntity>
-    fun getPlanet(id : String) : Single<PlanetEntity>
-    fun getSpecie(id : String) : Single<SpecieEntity>
+    fun searchPersons(query: String): Observable<List<PersonEntity>>
+    fun getFilm(id: String): Single<FilmEntity>
+    fun getPlanet(id: String): Single<PlanetEntity>
+    fun getSpecie(id: String): Single<SpecieEntity>
 }

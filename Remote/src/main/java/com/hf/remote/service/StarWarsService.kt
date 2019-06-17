@@ -13,19 +13,19 @@ import retrofit2.http.Query
 interface StarWarsService {
 
     @GET("/api/people/")
-    fun searchPeople(@Query("search") query : String, @Query("page") page : String = "1")
-        : Observable<SearchPersonResponseModel>
+    fun searchPeople(@Query("search") query: String, @Query("page") page: String = "1")
+            : Observable<SearchPersonResponseModel>
 
     @GET("/api/films/{filmId}")
-    fun findFilmById(@Path("filmId") id : String)
+    fun findFilmById(@Path("filmId") id: String)
             : Single<FilmModel>
 
     @GET("/api/species/{specieId}")
-    fun findSpecieById(@Path("specieId") id : String)
+    fun findSpecieById(@Path("specieId") id: String)
             : Single<SpecieModel>
 
     @GET("/api/planets/{planetId}")
-    fun findPlanetById(@Path("planetId") id : String)
+    fun findPlanetById(@Path("planetId") id: String)
             : Single<PlanetModel>
 
 }

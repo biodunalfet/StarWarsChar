@@ -9,8 +9,8 @@ import io.reactivex.Single
 
 interface IStarWarsRepository {
 
-    fun getPersons(query : String) : Observable<List<Person>>
-    fun getFilmById(url : String) : Single<Film>
-    fun getSpecieById(url : String) : Single<Specie>
-    fun getPlanetById(url : String) : Single<Planet>
+    fun getPersons(query: String): Observable<List<Person>>
+    fun getFilmById(url: String): Single<Film>
+    fun getSpecieById(url: String): Single<Specie>
+    fun getPlanetById(url: String): Single<Planet>
 }

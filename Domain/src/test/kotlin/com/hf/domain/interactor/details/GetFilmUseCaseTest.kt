@@ -3,23 +3,25 @@ package com.hf.domain.interactor.details
 import com.hf.domain.executor.PostExecutionThread
 import com.hf.domain.model.Film
 import com.hf.domain.repository.IStarWarsRepository
-import com.nhaarman.mockito_kotlin.*
+import com.nhaarman.mockito_kotlin.any
+import com.nhaarman.mockito_kotlin.argumentCaptor
+import com.nhaarman.mockito_kotlin.verify
+import com.nhaarman.mockito_kotlin.whenever
 import io.reactivex.Single
 import junit.framework.Assert.assertEquals
-import org.assertj.core.api.Assertions
-import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 import test.FilmDataFactory
-import java.lang.IllegalArgumentException
 
 class GetFilmUseCaseTest {
 
     private lateinit var getFilmUseCase: GetFilmUseCase
-    @Mock lateinit var starWarsRepository: IStarWarsRepository
-    @Mock lateinit var postExecutionThread: PostExecutionThread
+    @Mock
+    lateinit var starWarsRepository: IStarWarsRepository
+    @Mock
+    lateinit var postExecutionThread: PostExecutionThread
 
     @Before
     fun setUp() {
@@ -65,7 +67,7 @@ class GetFilmUseCaseTest {
         assertEquals(captor.firstValue, stubbedParam.id)
     }
 
-    private fun stubGetFilmUseCase(single : Single<Film>) {
+    private fun stubGetFilmUseCase(single: Single<Film>) {
         whenever(starWarsRepository.getFilmById(any()))
             .thenReturn(single)
     }

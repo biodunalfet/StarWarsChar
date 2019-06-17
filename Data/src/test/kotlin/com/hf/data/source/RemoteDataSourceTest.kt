@@ -4,16 +4,14 @@ import com.hf.data.model.FilmEntity
 import com.hf.data.model.PersonEntity
 import com.hf.data.model.PlanetEntity
 import com.hf.data.model.SpecieEntity
-import com.hf.data.repository.ICache
 import com.hf.data.repository.IRemote
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.argumentCaptor
 import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.whenever
-import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
@@ -41,8 +39,10 @@ class RemoteDataSourceTest {
 
     @Test
     fun searchPersonReturnsData() {
-        val data = listOf(MapperFactory.makePersonEntity(),
-            MapperFactory.makePersonEntity(), MapperFactory.makePersonEntity())
+        val data = listOf(
+            MapperFactory.makePersonEntity(),
+            MapperFactory.makePersonEntity(), MapperFactory.makePersonEntity()
+        )
         stubGetPerson(Observable.just(data))
         val testObserver = remoteDataSource.searchPersons(MapperFactory.randomString()).test()
         testObserver.assertValue(data)
@@ -52,8 +52,10 @@ class RemoteDataSourceTest {
     fun getSearchPersonCallsCacheSourceWithCorrectParams() {
 
         val captor = argumentCaptor<String>()
-        val data = listOf(MapperFactory.makePersonEntity(),
-            MapperFactory.makePersonEntity(), MapperFactory.makePersonEntity())
+        val data = listOf(
+            MapperFactory.makePersonEntity(),
+            MapperFactory.makePersonEntity(), MapperFactory.makePersonEntity()
+        )
         stubGetPerson(Observable.just(data))
         val stubbedQuery = MapperFactory.randomString()
 

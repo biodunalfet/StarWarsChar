@@ -9,5 +9,5 @@ import dagger.Module
 abstract class DataModule {
 
     @Binds
-    abstract fun bindDataRepository(dataRepository: StarWarsRepository) : IStarWarsRepository
+    abstract fun bindDataRepository(dataRepository: StarWarsRepository): IStarWarsRepository
 }

@@ -10,16 +10,15 @@ import com.hf.domain.model.Specie
 import com.hf.domain.repository.IStarWarsRepository
 import io.reactivex.Observable
 import io.reactivex.Single
-import java.lang.IllegalArgumentException
 import javax.inject.Inject
 
 class StarWarsRepository @Inject constructor(
-    private val filmMapper : FilmMapper,
+    private val filmMapper: FilmMapper,
     private val planetMapper: PlanetMapper,
     private val specieMapper: SpecieMapper,
     private val personMapper: PersonMapper,
-    private val urlToIdMapper : UrlToIdMapper,
-    private val localDataStore : LocalDataSource,
+    private val urlToIdMapper: UrlToIdMapper,
+    private val localDataStore: LocalDataSource,
     private val remoteDataSource: RemoteDataSource
 ) : IStarWarsRepository {
 

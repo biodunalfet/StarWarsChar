@@ -9,11 +9,12 @@ import com.hf.presentation.model.PersonListItemView
 import com.hf.starwars.R
 import kotlinx.android.synthetic.main.results_list_item.view.*
 
-class SearchResultsRecyclerAdapter (val onItemClickListener : (PersonListItemView) -> Unit) : RecyclerView.Adapter<SearchResultsRecyclerAdapter.ViewHolder>() {
+class SearchResultsRecyclerAdapter(val onItemClickListener: (PersonListItemView) -> Unit) :
+    RecyclerView.Adapter<SearchResultsRecyclerAdapter.ViewHolder>() {
 
-    var items : List<PersonListItemView?> = emptyList()
+    var items: List<PersonListItemView?> = emptyList()
 
-    fun updateItems(i : List<PersonListItemView?>) {
+    fun updateItems(i: List<PersonListItemView?>) {
         DiffUtil.calculateDiff(PersonItemDiffUtils(items, i)).dispatchUpdatesTo(this)
         this.items = i
     }
@@ -30,13 +31,13 @@ class SearchResultsRecyclerAdapter (val onItemClickListener : (PersonListItemVie
         holder.bind(items[position])
     }
 
-    inner class ViewHolder(itemView: View)  : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
         init {
             itemView.setOnClickListener(this)
         }
 
-        var item : PersonListItemView? = null
+        var item: PersonListItemView? = null
 
         override fun onClick(p0: View?) {
 
@@ -47,7 +48,7 @@ class SearchResultsRecyclerAdapter (val onItemClickListener : (PersonListItemVie
             }
         }
 
-        fun bind(item : PersonListItemView?) {
+        fun bind(item: PersonListItemView?) {
 
             item?.let {
                 this.item = it

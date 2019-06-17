@@ -21,7 +21,7 @@ object MapperFactory {
         return ThreadLocalRandom.current().nextInt(1, 1000 + 1)
     }
 
-    fun randomStringList(count : Int = randomInt()) : List<String> {
+    fun randomStringList(count: Int = randomInt()): List<String> {
         val list = mutableListOf<String>()
         for (i in 0..count) {
             list.add(randomString())
@@ -30,50 +30,51 @@ object MapperFactory {
         return list
     }
 
-    fun randomUrl(type : String, valid : Boolean = true, id : Int = randomInt()) : String {
+    fun randomUrl(type: String, valid: Boolean = true, id: Int = randomInt()): String {
         return if (valid) {
             "https://swapi.co/api/$type/$id/"
-        }
-        else {
+        } else {
             randomString()
         }
     }
 
-    fun makeFilmEntity() : FilmEntity {
+    fun makeFilmEntity(): FilmEntity {
         return FilmEntity(randomString(), randomString(), randomString(), randomUrl("films"))
     }
 
-    fun makeFilm() : Film {
+    fun makeFilm(): Film {
         return Film(randomString(), randomString(), randomString(), randomUrl("films"))
     }
 
-    fun makePerson() : Person {
+    fun makePerson(): Person {
         return Person(
             randomString(), randomString(), randomString(),
             randomStringList(),
             randomString(),
-            randomStringList(), randomString())
+            randomStringList(), randomString()
+        )
     }
 
-    fun makePersonEntity() : PersonEntity {
-        return PersonEntity(randomString(), randomString(), randomString(), randomStringList(),
+    fun makePersonEntity(): PersonEntity {
+        return PersonEntity(
+            randomString(), randomString(), randomString(), randomStringList(),
             randomString(), randomStringList(), randomUrl("person")
-            )
+        )
     }
 
-    fun makePlanetEntity() : PlanetEntity {
+    fun makePlanetEntity(): PlanetEntity {
         return PlanetEntity(randomString(), randomString(), randomString())
     }
 
-    fun makePlanet() : Planet {
+    fun makePlanet(): Planet {
         return Planet(randomString(), randomString(), randomString())
     }
 
-    fun makeSpecieEntity() : SpecieEntity {
+    fun makeSpecieEntity(): SpecieEntity {
         return SpecieEntity(randomString(), randomString(), randomString(), randomString())
     }
 
-    fun makeSpecie() : Specie {
+    fun makeSpecie(): Specie {
         return Specie(randomString(), randomString(), randomString(), randomString())
     }
 

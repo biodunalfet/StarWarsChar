@@ -2,15 +2,14 @@ package com.hf.data.mapper
 
 import com.hf.data.model.PersonEntity
 import com.hf.domain.model.Person
+import org.junit.Assert.assertEquals
 import org.junit.Before
-
-import org.junit.Assert.*
 import org.junit.Test
 import test.MapperFactory
 
 class PersonMapperTest {
 
-    private lateinit var mapper : PersonMapper
+    private lateinit var mapper: PersonMapper
 
     @Before
     fun setUp() {

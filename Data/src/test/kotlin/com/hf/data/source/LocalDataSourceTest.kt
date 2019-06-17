@@ -20,9 +20,12 @@ import test.MapperFactory
 class LocalDataSourceTest {
 
     lateinit var localDataSource: LocalDataSource
-    @Mock lateinit var filmCacheMock: ICache<String, FilmEntity>
-    @Mock lateinit var planetCacheMock: ICache<String, PlanetEntity>
-    @Mock lateinit var specieCacheMock: ICache<String, SpecieEntity>
+    @Mock
+    lateinit var filmCacheMock: ICache<String, FilmEntity>
+    @Mock
+    lateinit var planetCacheMock: ICache<String, PlanetEntity>
+    @Mock
+    lateinit var specieCacheMock: ICache<String, SpecieEntity>
 
     @Before
     fun setUp() {
@@ -107,7 +110,8 @@ class LocalDataSourceTest {
     @Test
     fun saveSpecieCompletes() {
         stubsSaveSpecie(Completable.complete())
-        val testObserver = localDataSource.saveSpecie(MapperFactory.randomString(), MapperFactory.makeSpecieEntity()).test()
+        val testObserver =
+            localDataSource.saveSpecie(MapperFactory.randomString(), MapperFactory.makeSpecieEntity()).test()
         testObserver.assertComplete()
     }
 
@@ -128,7 +132,8 @@ class LocalDataSourceTest {
     @Test
     fun savePlanetCompletes() {
         stubsSavePlanet(Completable.complete())
-        val testObserver = localDataSource.savePlanet(MapperFactory.randomString(), MapperFactory.makePlanetEntity()).test()
+        val testObserver =
+            localDataSource.savePlanet(MapperFactory.randomString(), MapperFactory.makePlanetEntity()).test()
         testObserver.assertComplete()
     }
 

@@ -12,9 +12,9 @@ import io.reactivex.Single
 import javax.inject.Inject
 
 class LocalDataSource @Inject constructor(
-    private val filmCache : ICache<String, FilmEntity>,
-    private val planetCache : ICache<String, PlanetEntity>,
-    private val specieCache : ICache<String, SpecieEntity>
+    private val filmCache: ICache<String, FilmEntity>,
+    private val planetCache: ICache<String, PlanetEntity>,
+    private val specieCache: ICache<String, SpecieEntity>
 ) : IStarWarsDataSource {
 
     override fun getFilmWithId(id: String): Single<FilmEntity> {
@@ -33,15 +33,15 @@ class LocalDataSource @Inject constructor(
         throw UnsupportedOperationException("not supported")
     }
 
-    override fun saveSpecie(id : String, specie: SpecieEntity): Completable {
+    override fun saveSpecie(id: String, specie: SpecieEntity): Completable {
         return specieCache.saveItemWithId(id, specie)
     }
 
-    override fun savePlanet(id : String, planet: PlanetEntity): Completable {
+    override fun savePlanet(id: String, planet: PlanetEntity): Completable {
         return planetCache.saveItemWithId(id, planet)
     }
 
-    override fun saveFilm(id : String, film: FilmEntity): Completable {
+    override fun saveFilm(id: String, film: FilmEntity): Completable {
         return filmCache.saveItemWithId(id, film)
     }
 }

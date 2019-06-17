@@ -67,7 +67,7 @@ class GetPlanetUseCaseTest {
         assertEquals(captor.firstValue, stubbedParam.id)
     }
 
-    private fun stubGetPlanetUseCase(single : Single<Planet>) {
+    private fun stubGetPlanetUseCase(single: Single<Planet>) {
         whenever(starWarsRepository.getPlanetById(any()))
             .thenReturn(single)
     }

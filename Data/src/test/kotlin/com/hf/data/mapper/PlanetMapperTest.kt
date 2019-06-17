@@ -2,14 +2,14 @@ package com.hf.data.mapper
 
 import com.hf.data.model.PlanetEntity
 import com.hf.domain.model.Planet
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import test.MapperFactory
 
 class PlanetMapperTest {
 
-    private lateinit var mapper : PlanetMapper
+    private lateinit var mapper: PlanetMapper
 
     @Before
     fun setUp() {

@@ -6,19 +6,14 @@ import com.hf.data.model.PlanetEntity
 import com.hf.data.model.SpecieEntity
 import com.hf.data.repository.IRemote
 import com.hf.data.repository.IStarWarsDataSource
-import com.hf.domain.model.Film
-import com.hf.domain.model.Person
-import com.hf.domain.model.Planet
-import com.hf.domain.model.Specie
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
-import java.lang.UnsupportedOperationException
 import javax.inject.Inject
 
-class RemoteDataSource @Inject constructor (
-    private val remote : IRemote
-) : IStarWarsDataSource{
+class RemoteDataSource @Inject constructor(
+    private val remote: IRemote
+) : IStarWarsDataSource {
 
     override fun searchPersons(query: String): Observable<List<PersonEntity>> {
         return remote.searchPersons(query)

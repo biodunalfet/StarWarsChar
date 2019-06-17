@@ -1,0 +1,100 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    def globalConfiguration = rootProject.extensions.getByName("ext")
+
+    compileSdkVersion globalConfiguration["androidCompileSdkVersion"]
+    buildToolsVersion globalConfiguration["androidBuildToolsVersion"]
+
+    defaultConfig {
+        applicationId "com.hf.starwars"
+        minSdkVersion globalConfiguration["androidMinSdkVersion"]
+        targetSdkVersion globalConfiguration["androidTargetSdkVersion"]
+        testInstrumentationRunner "co.joebirch.mobile_ui.test.TestRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    androidExtensions {
+        experimental = true
+    }
+
+}
+
+dependencies {
+    def mobileUiDependencies = rootProject.ext.mobileUiDependencies
+    def mobileUiTestDependencies = rootProject.ext.mobileUiTestDependencies
+
+
+    implementation project(':Presentation')
+    implementation project(':Data')
+    implementation project(':Remote')
+    implementation project(':Cache')
+
+    implementation mobileUiDependencies.javaxAnnotation
+
+    implementation mobileUiDependencies.kotlin
+    implementation mobileUiDependencies.javaxInject
+    implementation mobileUiDependencies.rxKotlin
+    implementation mobileUiDependencies.timber
+    implementation mobileUiDependencies.rxAndroid
+    implementation mobileUiDependencies.dagger
+    implementation mobileUiDependencies.daggerSupport
+    implementation mobileUiDependencies.roomRxJava
+    implementation mobileUiDependencies.stetho
+    implementation mobileUiDependencies.appCompat
+    implementation mobileUiDependencies.materialComponent
+    implementation mobileUiDependencies.constraintLayout
+
+    implementation presentationDependencies.archRuntime
+    implementation presentationDependencies.archExtensions
+    kapt presentationDependencies.archCompiler
+
+    testImplementation mobileUiTestDependencies.kotlinJUnit
+
+    kapt mobileUiDependencies.daggerCompiler
+    kapt mobileUiDependencies.daggerProcessor
+    compileOnly mobileUiDependencies.glassfishAnnotation
+
+    // Instrumentation test dependencies
+    androidTestImplementation mobileUiTestDependencies.junit
+    androidTestImplementation mobileUiTestDependencies.mockito
+    androidTestImplementation mobileUiTestDependencies.mockitoAndroid
+    androidTestImplementation(mobileUiTestDependencies.espressoCore) {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestImplementation(mobileUiTestDependencies.androidRunner) {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestImplementation(mobileUiTestDependencies.androidRules) {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestImplementation(mobileUiTestDependencies.espressoIntents) {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestImplementation(mobileUiTestDependencies.espressoContrib) {
+        exclude module: 'appcompat'
+        exclude module: 'appcompat-v7'
+        exclude module: 'support-v4'
+        exclude module: 'support-v13'
+        exclude module: 'support-annotations'
+        exclude module: 'recyclerview-v7'
+        exclude module: 'design'
+    }
+
+    kaptTest mobileUiDependencies.daggerCompiler
+    kaptAndroidTest mobileUiDependencies.daggerCompiler
+}

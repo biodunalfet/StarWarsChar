@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:paddingStart="@dimen/list_item_padding_left"
+              android:clickable="true"
+              android:paddingEnd="@dimen/list_item_padding_right"
+              android:paddingTop="@dimen/list_item_padding_top"
+              android:paddingBottom="@dimen/list_item_padding_bottom"
+              android:layout_height="wrap_content" android:focusable="true">
+
+    <TextView
+            android:layout_width="wrap_content"
+            tools:text="Luke Skywalker"
+            android:id="@+id/nameTv"
+            android:textSize="@dimen/primary_list_item_text_size"
+            android:layout_marginBottom="5dp"
+            android:textColor="@color/primaryTextColor"
+            android:layout_height="wrap_content"/>
+
+    <TextView
+            android:layout_width="wrap_content"
+            tools:text="19BBY"
+            android:id="@+id/birthYearTv"
+            android:textSize="@dimen/secondary_list_item_text_size"
+            android:textColor="@color/secondaryTextColor"
+            android:layout_height="wrap_content"/>
+
+</LinearLayout>

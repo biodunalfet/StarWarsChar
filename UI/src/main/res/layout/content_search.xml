@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:padding="@dimen/search_layout_padding"
+        tools:context=".search.SearchActivity">
+
+    <com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent"
+                                                           android:layout_marginBottom="@dimen/_7dp_"
+                                                           android:layout_marginLeft="@dimen/_7dp_"
+                                                           android:id="@+id/queryTil"
+                                                           android:layout_marginRight="@dimen/_7dp_"
+                                                           android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText android:layout_width="match_parent"
+                                                                 android:layout_height="wrap_content"
+                                                                 android:id="@+id/queryEt"
+                                                                 android:hint="@string/search_hint"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            tools:listitem="@layout/results_list_item"
+            android:id="@+id/resultsRecyclerView"
+            android:layout_height="wrap_content"/>
+
+</LinearLayout>

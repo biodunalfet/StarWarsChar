@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Star Wars</string>
+    <string name="name">Name</string>
+    <string name="search_hint">Search</string>
+    <string name="title_activity_person_details">PersonDetailsActivity</string>
+    <string name="name_label">NAME</string>
+    <string name="birth_year_label">BIRTH YEAR</string>
+    <string name="height_label">HEIGHT</string>
+    <string name="language_label">LANGUAGE</string>
+    <string name="home_world">HOME WORLD</string>
+    <string name="population_label">POPULATION</string>
+    <string name="specie_name_label">SPECIE NAME</string>
+    <string name="films_label">FILMS</string>
+</resources>

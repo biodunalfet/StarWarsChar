@@ -1,0 +1,16 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="_16dp_">16dp</dimen>
+    <dimen name="_14dp_">14dp</dimen>
+    <dimen name="_7dp_">7dp</dimen>
+    <dimen name="_10dp_">10dp</dimen>
+    <dimen name="primary_list_item_text_size">16sp</dimen>
+    <dimen name="_5dp_">5dp</dimen>
+    <dimen name="secondary_list_item_text_size">14sp</dimen>
+    <dimen name="divider_height">1dp</dimen>
+    <dimen name="search_layout_padding">12dp</dimen>
+    <dimen name="list_item_padding_left">16dp</dimen>
+    <dimen name="list_item_padding_right">16dp</dimen>
+    <dimen name="list_item_padding_top">14dp</dimen>
+    <dimen name="list_item_padding_bottom">14dp</dimen>
+</resources>

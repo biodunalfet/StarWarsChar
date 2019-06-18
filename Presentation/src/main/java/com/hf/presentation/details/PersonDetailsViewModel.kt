@@ -43,6 +43,16 @@ class PersonDetailsViewModel @Inject constructor(
     val getFilmLiveData
             : MutableLiveData<Resource<MutableList<FilmView>>> = MutableLiveData()
 
+    override fun onCleared() {
+        disposeUseCases()
+        super.onCleared()
+    }
+
+    private fun disposeUseCases() {
+        speciesUseCase.dispose()
+        planetUseCase.dispose()
+        filmUseCase.dispose()
+    }
 
     fun onPersonReceived(person: PersonListItemView?) {
 

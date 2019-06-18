@@ -22,6 +22,10 @@ class SearchViewModel @Inject constructor(
     val liveData
             : MutableLiveData<Resource<List<PersonListItemView>>> = MutableLiveData()
 
+    override fun onCleared() {
+        searchPersonUseCase.dispose()
+        super.onCleared()
+    }
 
     fun search(query: String) {
         if (query.isNotEmpty()) {

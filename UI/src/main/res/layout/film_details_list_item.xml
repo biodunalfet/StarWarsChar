@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:paddingLeft="@dimen/_16dp_"
+              android:paddingRight="@dimen/_16dp_"
+              android:paddingTop="@dimen/_14dp_"
+              android:paddingBottom="@dimen/_14dp_"
+              android:layout_height="wrap_content">
+
+    <TextView android:layout_width="match_parent"
+              android:textSize="12sp"
+              android:layout_marginBottom="@dimen/_4dp_"
+              android:layout_height="wrap_content"
+              tools:text="RELEASED ON 23-12-1999"
+              android:id="@+id/releaseDateTv"
+              android:textColor="@color/secondaryTextColor"
+              android:textStyle="bold"
+    />
+
+    <TextView android:layout_width="match_parent"
+              android:textSize="@dimen/primary_list_item_text_size"
+              android:layout_height="wrap_content"
+              tools:text="Attack of the Clones"
+              android:layout_marginBottom="@dimen/_2dp_"
+              android:id="@+id/titleTv"
+              android:textColor="@color/primaryTextColor"
+              android:textStyle="bold"
+    />
+
+    <TextView android:layout_width="match_parent"
+              android:textSize="@dimen/secondary_list_item_text_size"
+              android:layout_height="wrap_content"
+              android:id="@+id/openingCrawlTv"
+              tools:text="Ullam at, laboris nunc parturient quo condimentum diamlorem, quod cupidatat explicabo integer venenatis! Eveniet aut dignissim, erat laudantium, etiam bibendum soluta! "
+              android:textColor="@color/secondaryTextColor"
+    />
+</LinearLayout>

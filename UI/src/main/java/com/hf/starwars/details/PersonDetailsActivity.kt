@@ -2,8 +2,11 @@ package com.hf.starwars.details
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.hf.presentation.details.PersonDetailsViewModel
 import com.hf.presentation.model.PersonListItemView
 import com.hf.starwars.Constants.PERSON_EXTRA_KEY
@@ -38,6 +41,27 @@ class PersonDetailsActivity : AppCompatActivity() {
             viewModel.onPersonReceived(it)
         }
 
+        setUpFilmsRecyclerView()
+
+    }
+
+    private fun setUpFilmsRecyclerView() {
+
+        filmsRv.layoutManager = LinearLayoutManager(this)
+
+        filmsRv.addItemDecoration(
+            DividerItemDecoration(
+                this,
+                DividerItemDecoration.VERTICAL
+            )
+        )
+
+        val itemDecorator = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
+        ContextCompat.getDrawable(this, R.drawable.search_results_divider)?.let {
+            itemDecorator.setDrawable(it)
+        }
+
+        filmsRv.adapter = FilmsRecyclerAdapter()
     }
 
     private fun setUpObservers() {
@@ -72,17 +96,10 @@ class PersonDetailsActivity : AppCompatActivity() {
         })
 
         viewModel.filmLiveData.observe(this, Observer {
-            it?.data?.let {
-                var text = ""
-
-                for (f in it) {
-                    text += f.title + ", "
+            it?.data?.let { items ->
+                (filmsRv.adapter as FilmsRecyclerAdapter?)?.let {
+                    it.updateItem(items)
                 }
-
-                if (it.size > 0) text = text.substring(0, text.length - 2)
-
-                filmsTv.text = text
-
             }
         })
     }

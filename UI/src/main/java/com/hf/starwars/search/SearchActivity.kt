@@ -116,7 +116,6 @@ class SearchActivity : AppCompatActivity() {
 
         viewModel.navToDetailsPage.observe(this, Observer {
             it?.getContentIfNotHandled()?.let {
-                Toast.makeText(this, it.name, Toast.LENGTH_SHORT).show()
 
                 val intent = Intent(this, PersonDetailsActivity::class.java)
                 intent.putExtra(PERSON_EXTRA_KEY, it)

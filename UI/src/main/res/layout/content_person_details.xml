@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<androidx.core.widget.NestedScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -18,7 +18,6 @@
             android:orientation="vertical"
             android:paddingBottom="@dimen/_14dp_"
             android:layout_height="wrap_content">
-
 
         <TextView
                 android:layout_width="match_parent"
@@ -175,28 +174,29 @@
         <View android:layout_width="match_parent"
               android:background="@color/divider_color"
               android:layout_marginTop="@dimen/_7dp_"
-              android:layout_marginBottom="@dimen/_7dp_"
+              android:layout_marginBottom="@dimen/_16dp_"
               android:layout_height="@dimen/divider_height"/>
 
-        <TextView
-                android:layout_width="match_parent"
-                tools:text="200000"
-                android:id="@+id/filmsTv"
-                android:textSize="@dimen/primary_list_item_text_size"
-                android:layout_marginBottom="@dimen/_5dp_"
-                android:textColor="@color/primaryTextColor"
-                android:layout_height="wrap_content"/>
 
         <TextView
                 android:layout_width="match_parent"
                 android:textSize="@dimen/secondary_list_item_text_size"
                 android:text="@string/films_label"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
                 android:layout_marginBottom="@dimen/_10dp_"
                 android:textColor="@color/secondaryTextColor"
+                android:layout_height="wrap_content"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:id="@+id/filmsRv"
+                tools:itemCount="5"
+                tools:listitem="@layout/film_details_list_item"
                 android:layout_height="wrap_content"/>
 
 
     </LinearLayout>
 
 
-</ScrollView>
+</androidx.core.widget.NestedScrollView>

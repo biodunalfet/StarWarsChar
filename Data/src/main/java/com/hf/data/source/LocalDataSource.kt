@@ -1,8 +1,8 @@
 package com.hf.data.source
 
 import com.hf.data.model.FilmEntity
-import com.hf.data.model.PersonEntity
 import com.hf.data.model.PlanetEntity
+import com.hf.data.model.SearchResultsEntity
 import com.hf.data.model.SpecieEntity
 import com.hf.data.repository.ICache
 import com.hf.data.repository.IStarWarsDataSource
@@ -29,7 +29,7 @@ class LocalDataSource @Inject constructor(
         return specieCache.findItemById(id)
     }
 
-    override fun searchPersons(query: String): Observable<List<PersonEntity>> {
+    override fun searchPersons(query: String, page: Int): Observable<SearchResultsEntity> {
         throw UnsupportedOperationException("not supported")
     }
 

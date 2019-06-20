@@ -12,14 +12,13 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hf.presentation.search.SearchViewModel
-import com.hf.presentation.state.ResourceState
 import com.hf.starwars.Constants.PERSON_EXTRA_KEY
 import com.hf.starwars.R
+import com.hf.starwars.RecyclerViewPaginator
 import com.hf.starwars.ViewModelFactory
 import com.hf.starwars.details.PersonDetailsActivity
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.content_search.*
-import timber.log.Timber
 import javax.inject.Inject
 
 
@@ -80,9 +79,35 @@ class SearchActivity : AppCompatActivity() {
             viewModel.onPersonSelected(it)
         }
 
+        val recyclerViewPaginator = object : RecyclerViewPaginator(resultsRecyclerView) {
+            override val isLastPage: Boolean
+                get() = viewModel.isLastPage()
+
+
+            override fun loadMore(currentPage: Int) {
+//                Log.d("paginator", "loadmoreTotal for currentPage :$currentPage")
+                viewModel.loadData(currentPage)
+            }
+
+        }
+
+        resultsRecyclerView.addOnScrollListener(recyclerViewPaginator as RecyclerViewPaginator)
+
     }
 
     private fun setUpObservers() {
+
+        viewModel.msgSearchResultsLiveData.observe(this, Observer {
+            it?.let {
+                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+            }
+        })
+
+        viewModel.loadingSearchResultsLiveData.observe(this, Observer {
+            it?.let {
+                //todo show/hide progress indicator
+            }
+        })
 
         viewModel.navToDetailsPage.observe(this, Observer {
             it?.getContentIfNotHandled()?.let {
@@ -95,26 +120,13 @@ class SearchActivity : AppCompatActivity() {
         })
 
 
-        viewModel.liveData.observe(this, Observer {
-            it?.let {
-                when (it.status) {
-                    ResourceState.SUCCESS -> {
-
-                        it.data?.let { items ->
-                            (resultsRecyclerView.adapter as SearchResultsRecyclerAdapter?)?.let {
-                                it.updateItems(items)
-                            }
-                        }
-
-                    }
-                    ResourceState.LOADING -> {
-                        Timber.d("loading", "loading")
-                    }
-                    ResourceState.ERROR -> {
-                        Timber.d("error", it.message)
-                    }
+        viewModel.searchResultsLiveData.observe(this, Observer {
+            it?.let { items ->
+                (resultsRecyclerView.adapter as SearchResultsRecyclerAdapter?)?.let {
+                    it.updateItems(items)
                 }
             }
         })
     }
+
 }

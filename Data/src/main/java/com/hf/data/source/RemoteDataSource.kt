@@ -1,8 +1,8 @@
 package com.hf.data.source
 
 import com.hf.data.model.FilmEntity
-import com.hf.data.model.PersonEntity
 import com.hf.data.model.PlanetEntity
+import com.hf.data.model.SearchResultsEntity
 import com.hf.data.model.SpecieEntity
 import com.hf.data.repository.IRemote
 import com.hf.data.repository.IStarWarsDataSource
@@ -15,8 +15,8 @@ class RemoteDataSource @Inject constructor(
     private val remote: IRemote
 ) : IStarWarsDataSource {
 
-    override fun searchPersons(query: String): Observable<List<PersonEntity>> {
-        return remote.searchPersons(query)
+    override fun searchPersons(query: String, page: Int): Observable<SearchResultsEntity> {
+        return remote.searchPersons(query, page)
     }
 
     override fun saveSpecie(id: String, specie: SpecieEntity): Completable {

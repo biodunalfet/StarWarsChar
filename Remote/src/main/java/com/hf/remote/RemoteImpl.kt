@@ -1,8 +1,8 @@
 package com.hf.remote
 
 import com.hf.data.model.FilmEntity
-import com.hf.data.model.PersonEntity
 import com.hf.data.model.PlanetEntity
+import com.hf.data.model.SearchResultsEntity
 import com.hf.data.model.SpecieEntity
 import com.hf.data.repository.IRemote
 import com.hf.remote.mapper.FilmMapper
@@ -22,8 +22,8 @@ class RemoteImpl @Inject constructor(
     private val specieMapper: SpecieMapper
 ) : IRemote {
 
-    override fun searchPersons(query: String): Observable<List<PersonEntity>> {
-        return service.searchPeople(query).map {
+    override fun searchPersons(query: String, page: Int): Observable<SearchResultsEntity> {
+        return service.searchPeople(query, page).map {
             responseMapper.mapFromModel(it)
         }
     }

@@ -4,8 +4,8 @@ import com.hf.data.mapper.*
 import com.hf.data.source.LocalDataSource
 import com.hf.data.source.RemoteDataSource
 import com.hf.domain.model.Film
-import com.hf.domain.model.Person
 import com.hf.domain.model.Planet
+import com.hf.domain.model.SearchResult
 import com.hf.domain.model.Specie
 import com.hf.domain.repository.IStarWarsRepository
 import io.reactivex.Observable
@@ -16,15 +16,16 @@ class StarWarsRepository @Inject constructor(
     private val filmMapper: FilmMapper,
     private val planetMapper: PlanetMapper,
     private val specieMapper: SpecieMapper,
-    private val personMapper: PersonMapper,
+    private val searchResultMapper: SearchResultMapper,
     private val urlToIdMapper: UrlToIdMapper,
     private val localDataStore: LocalDataSource,
     private val remoteDataSource: RemoteDataSource
 ) : IStarWarsRepository {
 
-    override fun getPersons(query: String): Observable<List<Person>> {
-        return remoteDataSource.searchPersons(query).map {
-            it.map { personMapper.mapFromEntity(it) }
+    override fun getPersons(query: String, page: Int): Observable<SearchResult> {
+        return remoteDataSource.searchPersons(query, page).map {
+            it.query = query
+            searchResultMapper.mapFromEntity(it)
         }
     }
 

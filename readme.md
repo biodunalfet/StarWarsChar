@@ -4,7 +4,6 @@ A simple app that shows an implementation of [Uncle Bob's](https://blog.cleancod
 Technologies and Libraries
 -----------------
 - Kotlin
-- MVP
 - Clean Architecture
 - RxJava2
 - Retrofit

@@ -1,7 +1,7 @@
 package com.hf.domain.interactor.search
 
 import com.hf.domain.executor.PostExecutionThread
-import com.hf.domain.model.Person
+import com.hf.domain.model.SearchResult
 import com.hf.domain.repository.IStarWarsRepository
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.argumentCaptor
@@ -33,7 +33,7 @@ class SearchPersonUseCaseTest {
     @Test
     fun searchPersonUseCaseCompletes() {
 
-        stubSearchPersonUseCase(Observable.just(PersonDataFactory.makePersonList(PersonDataFactory.randomInt())))
+        stubSearchPersonUseCase(Observable.just(PersonDataFactory.makeSearchResult()))
         val testObserver = searchPersonUseCase.buildUseCaseObservable(PersonDataFactory.makePersonParam()).test()
 
         testObserver.assertComplete()
@@ -42,35 +42,37 @@ class SearchPersonUseCaseTest {
     @Test
     fun searchPersonUseCaseReturnsData() {
 
-        val personList = PersonDataFactory.makePersonList(PersonDataFactory.randomInt())
-        stubSearchPersonUseCase(Observable.just(personList))
+        val searchResult = PersonDataFactory.makeSearchResult()
+        stubSearchPersonUseCase(Observable.just(searchResult))
         val testObserver = searchPersonUseCase.buildUseCaseObservable(PersonDataFactory.makePersonParam()).test()
-        testObserver.assertValue(personList)
+        testObserver.assertValue(searchResult)
     }
 
     @Test(expected = IllegalArgumentException::class)
     fun searchPersonUseCaseCalledWithNoParams_errorThrown() {
 
-        val personList = PersonDataFactory.makePersonList(PersonDataFactory.randomInt())
-        stubSearchPersonUseCase(Observable.just(personList))
+        val searchResult = PersonDataFactory.makeSearchResult()
+        stubSearchPersonUseCase(Observable.just(searchResult))
         searchPersonUseCase.buildUseCaseObservable()
     }
 
     @Test
     fun searchPersonUseCaseCalledWithParams_repositoryGetsCorrectParams() {
 
-        val captor = argumentCaptor<String>()
-        val personList = PersonDataFactory.makePersonList(PersonDataFactory.randomInt())
-        stubSearchPersonUseCase(Observable.just(personList))
+        val queryCaptor = argumentCaptor<String>()
+        val pageCaptor = argumentCaptor<Int>()
+        val searchResult = PersonDataFactory.makeSearchResult()
+        stubSearchPersonUseCase(Observable.just(searchResult))
         val stubbedParam = PersonDataFactory.makePersonParam()
 
         searchPersonUseCase.buildUseCaseObservable(stubbedParam)
-        verify(starWarsRepository).getPersons(captor.capture())
-        assertEquals(captor.firstValue, stubbedParam.query)
+        verify(starWarsRepository).getPersons(queryCaptor.capture(), pageCaptor.capture())
+        assertEquals(queryCaptor.firstValue, stubbedParam.query)
+        assertEquals(pageCaptor.firstValue, stubbedParam.page)
     }
 
-    private fun stubSearchPersonUseCase(observable: Observable<List<Person>>) {
-        whenever(starWarsRepository.getPersons(any()))
+    private fun stubSearchPersonUseCase(observable: Observable<SearchResult>) {
+        whenever(starWarsRepository.getPersons(any(), any()))
             .thenReturn(observable)
     }
 

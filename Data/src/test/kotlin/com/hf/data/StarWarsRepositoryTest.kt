@@ -1,16 +1,10 @@
 package com.hf.data
 
 import com.hf.data.mapper.*
-import com.hf.data.model.FilmEntity
-import com.hf.data.model.PersonEntity
-import com.hf.data.model.PlanetEntity
-import com.hf.data.model.SpecieEntity
+import com.hf.data.model.*
 import com.hf.data.source.LocalDataSource
 import com.hf.data.source.RemoteDataSource
-import com.hf.domain.model.Film
-import com.hf.domain.model.Person
-import com.hf.domain.model.Planet
-import com.hf.domain.model.Specie
+import com.hf.domain.model.*
 import com.nhaarman.mockito_kotlin.*
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -33,7 +27,7 @@ class StarWarsRepositoryTest {
     @Mock
     lateinit var planetMapperMock: PlanetMapper
     @Mock
-    lateinit var personMapperMock: PersonMapper
+    lateinit var searchResultMapper: SearchResultMapper
     @Mock
     lateinit var specieMapperMock: SpecieMapper
     @Mock
@@ -44,49 +38,50 @@ class StarWarsRepositoryTest {
         MockitoAnnotations.initMocks(this)
         starWarsRepository = StarWarsRepository(
             filmMapperMock, planetMapperMock, specieMapperMock,
-            personMapperMock, urlToIdMapperMock, localDataSourceMock, remoteDataSourceMock
+            searchResultMapper, urlToIdMapperMock, localDataSourceMock, remoteDataSourceMock
         )
     }
 
     @Test
     fun getPersonsCompletes() {
-        stubSearchPerson(Observable.just(listOf(MapperFactory.makePersonEntity())))
-        stubPersonMapper(MapperFactory.makePerson())
+        stubSearchPerson(Observable.just(MapperFactory.makeSearchResultsEntity()))
+        stubSearchResultMapper(MapperFactory.makeSearchResult())
 
-        val testObserver = starWarsRepository.getPersons(MapperFactory.randomString()).test()
+        val testObserver = starWarsRepository.getPersons(MapperFactory.randomString(), MapperFactory.randomInt()).test()
         testObserver.assertComplete()
     }
 
     @Test
     fun getPersonReturnsData() {
-        val data = listOf(MapperFactory.makePersonEntity())
+        val data = MapperFactory.makeSearchResultsEntity()
         stubSearchPerson(Observable.just(data))
-        val personData = MapperFactory.makePerson()
-        stubPersonMapper(personData)
+        val searchResultData = MapperFactory.makeSearchResult()
+        stubSearchResultMapper(searchResultData)
 
-        val testObserver = starWarsRepository.getPersons(MapperFactory.randomString()).test()
-        testObserver.assertValue(listOf(personData))
+        val testObserver = starWarsRepository.getPersons(MapperFactory.randomString(), MapperFactory.randomInt()).test()
+        testObserver.assertValue(searchResultData)
     }
 
     @Test
     fun getPersonCallsRemoteDataSourceWithCorrectParams() {
 
-        val captor = argumentCaptor<String>()
-        val data = listOf(
-            MapperFactory.makePersonEntity(),
-            MapperFactory.makePersonEntity(), MapperFactory.makePersonEntity()
-        )
+        val queryCaptor = argumentCaptor<String>()
+        val pageCaptor = argumentCaptor<Int>()
+        val data = MapperFactory.makeSearchResultsEntity()
+
         stubSearchPerson(Observable.just(data))
 
-        val personData = MapperFactory.makePerson()
-        stubPersonMapper(personData)
+        val searchResultData = MapperFactory.makeSearchResult()
+        stubSearchResultMapper(searchResultData)
 
         val stubbedQuery = MapperFactory.randomString()
+        val stubbedPage = MapperFactory.randomInt()
 
-        starWarsRepository.getPersons(stubbedQuery)
+        starWarsRepository.getPersons(stubbedQuery, stubbedPage)
 
-        verify(remoteDataSourceMock).searchPersons(captor.capture())
-        assertEquals(captor.firstValue, stubbedQuery)
+        verify(remoteDataSourceMock).searchPersons(queryCaptor.capture(), pageCaptor.capture())
+        assertEquals(queryCaptor.firstValue, stubbedQuery)
+        assertEquals(pageCaptor.firstValue, stubbedPage)
     }
 
     @Test
@@ -235,8 +230,8 @@ class StarWarsRepositoryTest {
     }
 
 
-    private fun stubPersonMapper(domain: Person) {
-        whenever(personMapperMock.mapFromEntity(any())).thenReturn(domain)
+    private fun stubSearchResultMapper(domain: SearchResult) {
+        whenever(searchResultMapper.mapFromEntity(any())).thenReturn(domain)
     }
 
     private fun stubPlanetMapper(domain: Planet) {
@@ -285,7 +280,7 @@ class StarWarsRepositoryTest {
         }
     }
 
-    private fun stubSearchPerson(observable: Observable<List<PersonEntity>>?) {
-        whenever(remoteDataSourceMock.searchPersons(any())).thenReturn(observable)
+    private fun stubSearchPerson(observable: Observable<SearchResultsEntity>?) {
+        whenever(remoteDataSourceMock.searchPersons(any(), any())).thenReturn(observable)
     }
 }

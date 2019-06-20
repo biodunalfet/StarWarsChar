@@ -1,13 +1,7 @@
 package test
 
-import com.hf.data.model.FilmEntity
-import com.hf.data.model.PersonEntity
-import com.hf.data.model.PlanetEntity
-import com.hf.data.model.SpecieEntity
-import com.hf.domain.model.Film
-import com.hf.domain.model.Person
-import com.hf.domain.model.Planet
-import com.hf.domain.model.Specie
+import com.hf.data.model.*
+import com.hf.domain.model.*
 import java.util.*
 import java.util.concurrent.ThreadLocalRandom
 
@@ -60,6 +54,16 @@ object MapperFactory {
             randomString(), randomString(), randomString(), randomStringList(),
             randomString(), randomStringList(), randomUrl("person")
         )
+    }
+
+    fun makeSearchResultsEntity(): SearchResultsEntity {
+        return SearchResultsEntity(randomString(), randomString(), randomInt(),
+            listOf(makePersonEntity(), makePersonEntity(), makePersonEntity()), randomString())
+    }
+
+    fun makeSearchResult(): SearchResult {
+        return SearchResult(randomString(), randomString(), randomInt(),
+            listOf(makePerson(), makePerson(), makePerson()), randomString())
     }
 
     fun makePlanetEntity(): PlanetEntity {

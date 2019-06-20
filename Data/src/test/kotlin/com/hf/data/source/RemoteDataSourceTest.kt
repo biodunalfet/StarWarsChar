@@ -1,9 +1,6 @@
 package com.hf.data.source
 
-import com.hf.data.model.FilmEntity
-import com.hf.data.model.PersonEntity
-import com.hf.data.model.PlanetEntity
-import com.hf.data.model.SpecieEntity
+import com.hf.data.model.*
 import com.hf.data.repository.IRemote
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.argumentCaptor
@@ -32,17 +29,15 @@ class RemoteDataSourceTest {
 
     @Test
     fun searchPersonsCompletes() {
-        stubGetPerson(Observable.just(listOf(MapperFactory.makePersonEntity(), MapperFactory.makePersonEntity())))
+        stubGetPerson(Observable.just(MapperFactory.makeSearchResultsEntity()))
         val testObserver = remoteDataSource.searchPersons(MapperFactory.randomString()).test()
         testObserver.assertComplete()
     }
 
     @Test
     fun searchPersonReturnsData() {
-        val data = listOf(
-            MapperFactory.makePersonEntity(),
-            MapperFactory.makePersonEntity(), MapperFactory.makePersonEntity()
-        )
+        val data = MapperFactory.makeSearchResultsEntity()
+
         stubGetPerson(Observable.just(data))
         val testObserver = remoteDataSource.searchPersons(MapperFactory.randomString()).test()
         testObserver.assertValue(data)
@@ -51,18 +46,19 @@ class RemoteDataSourceTest {
     @Test
     fun getSearchPersonCallsCacheSourceWithCorrectParams() {
 
-        val captor = argumentCaptor<String>()
-        val data = listOf(
-            MapperFactory.makePersonEntity(),
-            MapperFactory.makePersonEntity(), MapperFactory.makePersonEntity()
-        )
+        val queryCaptor = argumentCaptor<String>()
+        val pageCaptor = argumentCaptor<Int>()
+        val data = MapperFactory.makeSearchResultsEntity()
+
         stubGetPerson(Observable.just(data))
         val stubbedQuery = MapperFactory.randomString()
+        val stubbedPage = MapperFactory.randomInt()
 
-        remoteDataSource.searchPersons(stubbedQuery).test()
+        remoteDataSource.searchPersons(stubbedQuery, stubbedPage).test()
 
-        verify(remoteMock).searchPersons(captor.capture())
-        assertEquals(captor.firstValue, stubbedQuery)
+        verify(remoteMock).searchPersons(queryCaptor.capture(), pageCaptor.capture())
+        assertEquals(queryCaptor.firstValue, stubbedQuery)
+        assertEquals(pageCaptor.firstValue, stubbedPage)
     }
 
     @Test
@@ -167,8 +163,8 @@ class RemoteDataSourceTest {
         remoteDataSource.saveSpecie(MapperFactory.randomString(), MapperFactory.makeSpecieEntity())
     }
 
-    private fun stubGetPerson(observable: Observable<List<PersonEntity>>?) {
-        whenever(remoteMock.searchPersons(any())).thenReturn(observable)
+    private fun stubGetPerson(observable: Observable<SearchResultsEntity>?) {
+        whenever(remoteMock.searchPersons(any(), any())).thenReturn(observable)
     }
 
     private fun stubGetFilmWithId(single: Single<FilmEntity>?) {

@@ -2,6 +2,8 @@ package test
 
 import com.hf.domain.interactor.search.SearchPersonUseCase
 import com.hf.domain.model.Person
+import com.hf.domain.model.SearchResult
+import com.nhaarman.mockito_kotlin.any
 import java.util.*
 import java.util.concurrent.ThreadLocalRandom
 
@@ -31,16 +33,20 @@ object PersonDataFactory {
         return list
     }
 
+    fun makeSearchResult() : SearchResult {
+        return SearchResult(randomUrl("people"), randomUrl("people"), randomInt(), makePersonList(2), randomUuid())
+    }
+
     fun makePerson(): Person {
         return Person(
             randomUuid(), randomUuid(), randomUuid(),
             SpecieDataFactory.makeSpecieList(randomInt()),
             randomUrl("planets"),
-            FilmDataFactory.makeFilmList(randomInt()), randomUrl("persons")
+            FilmDataFactory.makeFilmList(randomInt()), randomUrl("people")
         )
     }
 
     fun makePersonParam(): SearchPersonUseCase.Params {
-        return SearchPersonUseCase.Params.withQuery(randomUuid())
+        return SearchPersonUseCase.Params.withQuery(randomUuid(), randomInt())
     }
 }

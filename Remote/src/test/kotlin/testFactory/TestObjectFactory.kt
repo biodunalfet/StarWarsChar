@@ -1,9 +1,6 @@
 package testFactory
 
-import com.hf.data.model.FilmEntity
-import com.hf.data.model.PersonEntity
-import com.hf.data.model.PlanetEntity
-import com.hf.data.model.SpecieEntity
+import com.hf.data.model.*
 import com.hf.remote.model.*
 import java.util.*
 import java.util.concurrent.ThreadLocalRandom
@@ -42,7 +39,11 @@ object TestObjectFactory {
     }
 
     fun makeSearchPersonResponse(): SearchPersonResponseModel {
-        return SearchPersonResponseModel(randomString(), listOf(makePersonModel(), makePersonModel()))
+        return SearchPersonResponseModel(randomString(), randomString(), randomInt(), listOf(makePersonModel(), makePersonModel()))
+    }
+
+    fun makeSearchResultsEntity(): SearchResultsEntity {
+        return SearchResultsEntity(randomString(), randomString(), randomInt(), listOf(makePersonEntity(), makePersonEntity()))
     }
 
     fun makeFilmEntity(): FilmEntity {

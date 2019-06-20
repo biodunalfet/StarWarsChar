@@ -1,8 +1,8 @@
 package com.hf.remote
 
 import com.hf.data.model.FilmEntity
-import com.hf.data.model.PersonEntity
 import com.hf.data.model.PlanetEntity
+import com.hf.data.model.SearchResultsEntity
 import com.hf.data.model.SpecieEntity
 import com.hf.remote.mapper.FilmMapper
 import com.hf.remote.mapper.PlanetMapper
@@ -19,10 +19,9 @@ import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.whenever
 import io.reactivex.Observable
 import io.reactivex.Single
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
-import org.mockito.ArgumentCaptor
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 import testFactory.TestObjectFactory
@@ -46,9 +45,9 @@ class RemoteImplTest {
     @Test
     fun searchPersonCompletes() {
         stubServiceSearchPerson(TestObjectFactory.makeSearchPersonResponse())
-        stubResponseMapper(listOf(TestObjectFactory.makePersonEntity(), TestObjectFactory.makePersonEntity()))
+        stubResponseMapper(TestObjectFactory.makeSearchResultsEntity())
 
-        val testObserver = remoteImpl.searchPersons(TestObjectFactory.randomString()).test()
+        val testObserver = remoteImpl.searchPersons(TestObjectFactory.randomString(), TestObjectFactory.randomInt()).test()
         testObserver.assertComplete()
     }
 
@@ -82,9 +81,9 @@ class RemoteImplTest {
     @Test
     fun searchPersonCallsService() {
         stubServiceSearchPerson(TestObjectFactory.makeSearchPersonResponse())
-        stubResponseMapper(listOf(TestObjectFactory.makePersonEntity(), TestObjectFactory.makePersonEntity()))
+        stubResponseMapper(TestObjectFactory.makeSearchResultsEntity())
 
-        remoteImpl.searchPersons(TestObjectFactory.randomString())
+        remoteImpl.searchPersons(TestObjectFactory.randomString(), TestObjectFactory.randomInt())
         verify(starWarsServiceMock).searchPeople(any(), any())
     }
 
@@ -117,15 +116,19 @@ class RemoteImplTest {
 
     @Test
     fun searchPerson_serviceIsCalledIWithCorrectParam() {
-        val argumentCaptor = argumentCaptor<String>()
+        val queryArgumentCaptor = argumentCaptor<String>()
+        val pageArgumentCaptor = argumentCaptor<Int>()
+
         stubServiceSearchPerson(TestObjectFactory.makeSearchPersonResponse())
-        stubResponseMapper(listOf(TestObjectFactory.makePersonEntity(), TestObjectFactory.makePersonEntity()))
+        stubResponseMapper(TestObjectFactory.makeSearchResultsEntity())
 
         val query = TestObjectFactory.randomString()
+        val page = TestObjectFactory.randomInt()
 
-        remoteImpl.searchPersons(query)
-        verify(starWarsServiceMock).searchPeople(argumentCaptor.capture(), argumentCaptor.capture())
-        assertEquals(query, argumentCaptor.firstValue)
+        remoteImpl.searchPersons(query, page)
+        verify(starWarsServiceMock).searchPeople(queryArgumentCaptor.capture(), pageArgumentCaptor.capture())
+        assertEquals(query, queryArgumentCaptor.firstValue)
+        assertEquals(page, pageArgumentCaptor.firstValue)
     }
 
     @Test
@@ -172,10 +175,10 @@ class RemoteImplTest {
 
         stubServiceSearchPerson(TestObjectFactory.makeSearchPersonResponse())
 
-        val data = listOf(TestObjectFactory.makePersonEntity(), TestObjectFactory.makePersonEntity())
+        val data = TestObjectFactory.makeSearchResultsEntity()
         stubResponseMapper(data)
 
-        val testObserver = remoteImpl.searchPersons(TestObjectFactory.randomString()).test()
+        val testObserver = remoteImpl.searchPersons(TestObjectFactory.randomString(), TestObjectFactory.randomInt()).test()
         testObserver.assertValue(data)
     }
 
@@ -240,7 +243,7 @@ class RemoteImplTest {
         whenever(starWarsServiceMock.findPlanetById(any())).thenReturn(Single.just(data))
     }
 
-    private fun stubResponseMapper(data: List<PersonEntity>) {
+    private fun stubResponseMapper(data: SearchResultsEntity) {
         whenever(responseMapperMock.mapFromModel(any())).thenReturn(data)
     }
 

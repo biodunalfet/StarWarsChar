@@ -16,8 +16,12 @@ class SearchPersonResponseMapperTest {
         val model = TestObjectFactory.makeSearchPersonResponse()
         val entity = mapper.mapFromModel(model)
 
+        assertEquals(model.count, entity.count)
+        assertEquals(model.next, entity.next)
+        assertEquals(model.previous, entity.previous)
+
         model.results.forEachIndexed { index, personModel ->
-            assertEqualData(personModel, entity[index])
+            assertEqualData(personModel, entity.results[index])
         }
     }
 

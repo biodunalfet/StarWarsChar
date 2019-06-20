@@ -42,6 +42,20 @@ class SearchActivity : AppCompatActivity() {
         setUpResultsRecyclerView()
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putString("query", queryEt.text.toString())
+        super.onSaveInstanceState(outState)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
+
+        savedInstanceState?.let {
+            val query = it.getString("query")
+            queryEt.setText(query)
+        }
+    }
+
     private fun setUpTextInput() {
         queryEt.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {

@@ -7,12 +7,9 @@ import com.hf.cache.mapper.CachedFilmMapper
 import com.hf.cache.test.factory.TestObjectsFactory
 import com.hf.data.mapper.UrlToIdMapper
 import org.junit.Before
-
-import org.junit.Assert.*
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mock
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 

@@ -3,7 +3,6 @@ package test
 import com.hf.domain.interactor.search.SearchPersonUseCase
 import com.hf.domain.model.Person
 import com.hf.domain.model.SearchResult
-import com.nhaarman.mockito_kotlin.any
 import java.util.*
 import java.util.concurrent.ThreadLocalRandom
 

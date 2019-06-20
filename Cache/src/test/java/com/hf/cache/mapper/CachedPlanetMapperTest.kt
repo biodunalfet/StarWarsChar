@@ -6,8 +6,8 @@ import com.hf.data.mapper.IUrlToIdMapper
 import com.hf.data.model.PlanetEntity
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.whenever
+import org.junit.Assert.assertEquals
 import org.junit.Before
-import org.junit.Assert.*
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations

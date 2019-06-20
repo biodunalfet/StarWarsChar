@@ -5,7 +5,6 @@ import androidx.room.Room
 import com.hf.cache.db.StarWarsDatabase
 import com.hf.cache.test.factory.TestObjectsFactory
 import org.junit.After
-import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test

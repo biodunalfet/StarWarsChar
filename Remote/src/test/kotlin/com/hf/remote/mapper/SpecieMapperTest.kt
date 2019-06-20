@@ -2,7 +2,7 @@ package com.hf.remote.mapper
 
 import com.hf.data.model.SpecieEntity
 import com.hf.remote.model.SpecieModel
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
 import org.junit.Test
 import testFactory.TestObjectFactory
 

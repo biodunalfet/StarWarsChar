@@ -1,10 +1,16 @@
 package com.hf.data
 
 import com.hf.data.mapper.*
-import com.hf.data.model.*
+import com.hf.data.model.FilmEntity
+import com.hf.data.model.PlanetEntity
+import com.hf.data.model.SearchResultsEntity
+import com.hf.data.model.SpecieEntity
 import com.hf.data.source.LocalDataSource
 import com.hf.data.source.RemoteDataSource
-import com.hf.domain.model.*
+import com.hf.domain.model.Film
+import com.hf.domain.model.Planet
+import com.hf.domain.model.SearchResult
+import com.hf.domain.model.Specie
 import com.nhaarman.mockito_kotlin.*
 import io.reactivex.Observable
 import io.reactivex.Single

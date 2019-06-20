@@ -2,9 +2,8 @@ package com.hf.remote.mapper
 
 import com.hf.data.model.FilmEntity
 import com.hf.remote.model.FilmModel
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
 import org.junit.Test
-import org.junit.runner.RunWith
 import testFactory.TestObjectFactory
 
 class FilmMapperTest {

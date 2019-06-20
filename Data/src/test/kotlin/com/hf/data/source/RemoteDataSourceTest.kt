@@ -1,6 +1,9 @@
 package com.hf.data.source
 
-import com.hf.data.model.*
+import com.hf.data.model.FilmEntity
+import com.hf.data.model.PlanetEntity
+import com.hf.data.model.SearchResultsEntity
+import com.hf.data.model.SpecieEntity
 import com.hf.data.repository.IRemote
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.argumentCaptor

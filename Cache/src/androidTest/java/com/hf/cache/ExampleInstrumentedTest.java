@@ -1,7 +1,5 @@
 package com.hf.cache;
 
-import android.content.Context;
-
 /**
  * Instrumented test, which will execute on an Android device.
  *

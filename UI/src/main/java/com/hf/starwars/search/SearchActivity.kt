@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -105,7 +106,11 @@ class SearchActivity : AppCompatActivity() {
 
         viewModel.loadingSearchResultsLiveData.observe(this, Observer {
             it?.let {
-                //todo show/hide progress indicator
+                if (it) {
+                    progressBar.visibility = View.VISIBLE
+                } else {
+                    progressBar.visibility = View.GONE
+                }
             }
         })
 

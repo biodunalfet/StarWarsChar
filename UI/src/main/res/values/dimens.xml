@@ -13,4 +13,5 @@
     <dimen name="list_item_padding_right">16dp</dimen>
     <dimen name="list_item_padding_top">14dp</dimen>
     <dimen name="list_item_padding_bottom">14dp</dimen>
+    <dimen name="progress_bar_dimen">50dp</dimen>
 </resources>

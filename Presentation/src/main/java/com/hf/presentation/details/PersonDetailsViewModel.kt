@@ -103,6 +103,7 @@ class PersonDetailsViewModel @Inject constructor(
 
         for (s in species) {
             speciesUseCase.execute(GetSpecieSubscriber(), GetSpeciesUseCase.Params(s))
+            break
         }
 
     }
@@ -132,7 +133,7 @@ class PersonDetailsViewModel @Inject constructor(
     inner class GetSpecieSubscriber : DisposableSingleObserver<Specie>() {
 
         override fun onSuccess(specie: Specie) {
-            specieLiveData.postValue(Resource(ResourceState.SUCCESS, specieViewMapper.mapToView(specie), null))
+            specieLiveData.value = Resource(ResourceState.SUCCESS, specieViewMapper.mapToView(specie), null)
         }
 
 
@@ -145,7 +146,7 @@ class PersonDetailsViewModel @Inject constructor(
     inner class GetPlanetSubscriber : DisposableSingleObserver<Planet>() {
 
         override fun onSuccess(planet: Planet) {
-            planetLiveData.postValue(Resource(ResourceState.SUCCESS, planetViewMapper.mapToView(planet), null))
+            planetLiveData.value = Resource(ResourceState.SUCCESS, planetViewMapper.mapToView(planet), null)
         }
 
 

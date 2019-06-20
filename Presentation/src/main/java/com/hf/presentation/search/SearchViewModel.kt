@@ -1,6 +1,5 @@
 package com.hf.presentation.search
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.hf.domain.interactor.search.SearchPersonUseCase
@@ -56,7 +55,8 @@ class SearchViewModel @Inject constructor(
 
     private fun resetList() {
         currentPage = 1
-        searchResultsLiveData.postValue(emptyList())
+        searchResultsLiveData.value = emptyList()
+        loadingSearchResultsLiveData.value = false
     }
 
     fun onPersonSelected(person: PersonListItemView) {
@@ -65,10 +65,8 @@ class SearchViewModel @Inject constructor(
 
     fun loadData(c: Int) {
         if (!isLoadingMoreFor(c + 1) && !isLastPage()) {
-            Log.d("paginator", "ok, let me load more for page ${c + 1}?")
             search(currentQuery, c + 1)
             currentPage = c + 1
-            Log.d("paginator", "our new current page is ${c + 1}?")
         }
     }
 
@@ -78,9 +76,7 @@ class SearchViewModel @Inject constructor(
     }
 
     private fun isLoadingMoreFor(c: Int): Boolean {
-        Log.d("paginator", "are you loading more for page $currentPage?")
         val isLoading = c == this.currentPage && loadingSearchResultsLiveData.value == true
-        Log.d("paginator", if (isLoading) "yes" else "no")
         return isLoading
     }
 
@@ -97,14 +93,14 @@ class SearchViewModel @Inject constructor(
                 val currentList = searchResultsLiveData.value?.toMutableList() ?: mutableListOf()
                 currentList.addAll(t.results.map { mapper.mapToView(it) })
 
-                searchResultsLiveData.postValue(currentList)
+                searchResultsLiveData.value = currentList
 
 
             }
         }
 
         override fun onError(e: Throwable) {
-            msgSearchResultsLiveData.postValue(e.localizedMessage)
+            msgSearchResultsLiveData.value = e.localizedMessage
         }
 
     }

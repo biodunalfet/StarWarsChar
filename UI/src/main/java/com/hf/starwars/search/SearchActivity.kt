@@ -86,7 +86,6 @@ class SearchActivity : AppCompatActivity() {
 
 
             override fun loadMore(currentPage: Int) {
-//                Log.d("paginator", "loadmoreTotal for currentPage :$currentPage")
                 viewModel.loadData(currentPage)
             }
 

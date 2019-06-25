@@ -1,15 +1,39 @@
 # StarWarsChars
-A simple app that shows an implementation of [Uncle Bob's](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) Clean Architecture on Android
+A simple app that shows an implementation of [Uncle Bob's](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) Clean Architecture on Android. It interacts with the _tricky_ [Star Wars API](https://swapi.co/)
 
 Technologies and Libraries
 -----------------
 - Kotlin
+- MVP
 - Clean Architecture
 - RxJava2
 - Retrofit
 - Gson
 - Architecture Components (Room, LiveData)
 - Mockito, Espresso, JUnit4 tests
+
+# App Flow
+1. On app start, the user lands on the character search screen.
+2. The user can search for characters from the Star Wars universe. The result of the search should display a character list. The info that should be displayed on each of the result is defined below
+3. When tapping on a character, details are displayed as defined below
+
+```
+[Character search]
+name
+birth_year
+```
+
+```
+[Character details]
+name
+birth_year
+height (cm/feet/inches)
+name (species)
+language (species)
+homeworld (species)
+population (planets)
+films (the movies the character appears in: title, release date, opening crawl)
+```
 
 ## License
 
